@@ -1,0 +1,19 @@
+upstream api {
+    server nodeapp:3000;
+}
+
+server {
+        listen 80;
+
+        root /var/www/html;
+
+        index index.html ;
+
+        location / {
+        	try_files $uri $uri/ @backend;
+        }
+
+        location @backend {
+        	proxy_pass http://api;
+        }
+}

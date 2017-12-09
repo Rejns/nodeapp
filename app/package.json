@@ -1,0 +1,24 @@
+{
+  "name": "nodeapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "docker-compose -f ../docker-compose.dev.yml up --build",
+    "prod": "docker-compose -f ../docker-compose.yml up --build"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "bower": "^1.8.2",
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-inject": "^4.3.0",
+    "gulp-nodemon": "^2.2.1",
+    "gulp-sass": "^3.1.0",
+    "nodemon": "^1.12.1",
+    "wiredep": "^4.0.0"
+  }
+}

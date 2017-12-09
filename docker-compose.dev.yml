@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  ubuntu-nginx:
+    build:
+      context: ./app
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./app:/var/www/html
+    ports:
+      - 5001:80
+  nodeapp:
+    build: ./api
+    volumes:
+      - ./api:/usr/src/nodeapp/
+    ports:
+      - 3000:3000

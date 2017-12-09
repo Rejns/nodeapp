@@ -1,0 +1,13 @@
+@font-face {
+  font-family: "Bootstrap";
+  src: url("../fonts/glyphicons-halflings-regular.eot");
+  src: url("../fonts/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("../fonts/glyphicons-halflings-regular.woff") format("woff"), url("../fonts/glyphicons-halflings-regular.ttf") format("truetype"), url("../fonts/glyphicons-halflings-regular.svg#webfont") format("svg"); }
+
+.bootstrap-font {
+  font-family: "Bootstrap"; }
+
+.background-img {
+  background-image: url("../images/image.jpg"); }
+
+.jumbotron {
+  color: blue; }
