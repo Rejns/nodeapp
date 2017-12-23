@@ -18,9 +18,7 @@ RUN ["ln", "-s", "/etc/nginx/sites-available/nodeapp", "/etc/nginx/sites-enabled
 WORKDIR /var/www/html
 COPY . .
 RUN npm install
-RUN npm install -g bower
 RUN npm install -g gulp
-RUN bower install --allow-root
 RUN gulp build
 
 # Define default command.

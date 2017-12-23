@@ -1,1 +1,2 @@
-var a;
+angular.module("app", ["ngResource"]);
+

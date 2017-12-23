@@ -16,4 +16,9 @@ server {
         location @backend {
         	proxy_pass http://api;
         }
+
+        location ~ /(node_modules*|scss*)  {
+            deny all;
+            return 403;
+        }
 }

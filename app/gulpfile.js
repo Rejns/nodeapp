@@ -1,18 +1,12 @@
 var gulp = require('gulp');
-var nodemon = require('gulp-nodemon')
-var wiredep = require('wiredep').stream;
 var inject = require('gulp-inject');
-var clean = require('gulp-clean');
 var sass = require('gulp-sass');
+var gulpCopy = require('gulp-copy');
+var angularFilesort = require('gulp-angular-filesort');
  
 var paths = {
     index: "index.html",
 };
-
-gulp.task('clean', function () {
-    gulp.src('./fonts/*', {read: false})
-    	.pipe(clean());
-});
 
 gulp.task('sass', function () {
 	gulp.src('./scss/*.scss')
@@ -20,30 +14,23 @@ gulp.task('sass', function () {
 		.pipe(gulp.dest('./css/'));
 });
 
-gulp.task('inject', function() {
- 	var sources = gulp.src(['./js/**/*.js', './css/**/*.css'], {read: false});
+gulp.task('copy', function () {
+    return gulp.src(['./node_modules/angular/angular.min.js',
+                     './node_modules/@uirouter/angularjs/release/angular-ui-router.min.js',
+                     './node_modules/angular-resource/angular-resource.min.js'])
+        .pipe(gulp.dest('./js/lib'));
 
+});
+
+gulp.task('inject', ['copy'], function() {
     gulp.src(paths.index)
-        .pipe(wiredep({}))
-        .pipe(inject(sources))
+        .pipe(inject(gulp.src(['./js/**/*.js']).pipe(angularFilesort())))
+        .pipe(inject(gulp.src(['./css/**/*.css'])))
         .pipe(gulp.dest('.'));
-});
-
-gulp.task('fonts', function() {
-    gulp.src(['./bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.*'])
-    	.pipe(gulp.dest('./fonts/'));
-});
-
-gulp.task('start', function () {
-	nodemon({
-	 	script: 'server.js'
-	});
 });
 
 gulp.task('watch', function() {
 	gulp.watch('./scss/*', ['sass']);
 });
 
-gulp.task("build", ["clean", "sass", "inject", "fonts"]);
-
-gulp.task("default", ["clean", "sass", "inject", "fonts", "start", "watch"]);
+gulp.task("build", ["copy", "sass", "inject"]);
