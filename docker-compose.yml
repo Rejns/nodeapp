@@ -5,7 +5,21 @@ services:
     build: ./app
     ports:
       - 80:80
+    depends_on:
+      - nodeapp
   nodeapp:
+    depends_on:
+      - mongo
+    links:
+      - mongo
     build: ./api
     ports:
       - 3000:3000
+  mongo:
+    container_name: mongo
+    image: mongo
+    volumes:
+      - ./data/db:/data/db
+    ports:
+      - "27018:27017"
+    command: mongod
