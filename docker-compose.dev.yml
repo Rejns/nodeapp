@@ -9,7 +9,21 @@ services:
       - ./app:/var/www/html
     ports:
       - 5000:80
+    depends_on:
+      - nodeapp
+  mongo:
+      container_name: mongo
+      image: mongo
+      volumes:
+        - ./data/db:/data/db
+      ports:
+        - "27018:27017"
+      command: mongod
   nodeapp:
+    depends_on:
+      - mongo
+    links:
+      - mongo
     build: ./api
     volumes:
       - ./api:/usr/src/nodeapp/
